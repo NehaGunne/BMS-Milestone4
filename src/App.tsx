@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import AddBook from './add-book-page';
+import Home from './homePage'
+import Login from './login-page';
+import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
+import Navbar from './navbar';
+import Description from './description'; 
+import SignUp from './signup';
+import ProtectedRoute from './protected-route';
+import ContextProvider from './context/context-provider';
+import SearchedBooks from './searched-books';
+import SearchBar from './search-bar';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <ContextProvider>
+      <Router>
+        <Navbar/>
+          <div>
+            <Switch>
+              <Route path='/' exact component={Home}/>
+              <Route path='/search' component={SearchedBooks}/>
+              <Route path='/book/:id' >
+                <Description/>
+              </Route>
+              <ProtectedRoute path='/add-book' component={AddBook}/>
+              <Route path='/login'>
+                <Login/>
+              </Route>
+              <Route path='/signup'>
+                <SignUp/>
+              </Route>
+            </Switch>
+          </div>
+
+      </Router>
+
+    </ContextProvider>
+  )
 }
 
 export default App;
