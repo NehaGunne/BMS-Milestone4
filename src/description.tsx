@@ -5,7 +5,6 @@ import StarRating from "./stars";
 const Description=()=>{
     const {id}:any=useParams();
     const history=useHistory();
-    //let [book,setBooks]:any=useState(null);
     let store:any=useContext(bmsContext);
     let books:any=store.state.books;
     let book=store.state.selBook;
@@ -16,7 +15,7 @@ const Description=()=>{
             }
         }
        store.dispatch({type:'sel_book',payload:res})
-    })
+    },[])
     const handleDelete=()=>{
         store.dispatch({type:'del_book',payload:book})
         history.push('/')

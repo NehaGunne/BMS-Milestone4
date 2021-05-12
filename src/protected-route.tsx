@@ -1,25 +1,13 @@
-import {useEffect,useState} from 'react';
+import { useContext } from 'react';
 import {Route,Redirect} from 'react-router-dom';
+import { bmsContext } from './context/context-provider';
 interface Routeprops{
     component:React.FC,
     path:any
 }
-let isAuth=false
 const ProtectedRoute:React.FC<Routeprops>=({component:Component,...rest})=>{
-    //const [isAuth,setAuthorization]=useState(false)  
-    let val:any=document.cookie;
-    console.log(val);
-    if(val){
-        isAuth=true
-     //setAuthorization(true)
-    }else{
-        isAuth=false;
-        //setAuthorization(false)
-    }
-
-
-    console.log('protected',isAuth);
-    
+    let store:any=useContext(bmsContext)
+    let isAuth=store.state.isAuth
     return(
         <Route {...rest} render={(props)=>{
             if(isAuth){

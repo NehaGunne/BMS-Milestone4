@@ -9,7 +9,7 @@ import SignUp from './signup';
 import ProtectedRoute from './protected-route';
 import ContextProvider from './context/context-provider';
 import SearchedBooks from './searched-books';
-import SearchBar from './search-bar';
+
 
 function App() {
   return (

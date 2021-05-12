@@ -5,7 +5,6 @@ import { bmsContext } from './context/context-provider';
  
 const Navbar=()=>{
     let store:any=useContext(bmsContext);
-    //console.log('nav',store.state.isAuth);
     let isAuth=store.state.isAuth
     
     const history=useHistory();

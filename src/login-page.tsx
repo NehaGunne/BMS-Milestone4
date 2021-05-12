@@ -9,8 +9,8 @@ let user:any={
 const Login=()=>{
     let store:any=useContext(bmsContext);
     const history=useHistory();
-    let [errEmail,setEmail]=useState(null);
-    let [errPassword,setPassword]=useState(null);
+    let [errEmail,setEmail]=useState('');
+    let [errPassword,setPassword]=useState('');
     function handleChange(e:any){
         let key=e.target.name;
         let val=e.target.value;
@@ -18,10 +18,20 @@ const Login=()=>{
 
     }
     async function getUser(){
-        for(let i of store.state.users){
-            if(i.email===user.email && i.password===user.password){
-                store.dispatch({type:'log_in'})
-                history.push('/')
+        const {email,password}=user
+        setEmail('')
+        setPassword('')
+        if(email===''){
+            setEmail('please enter a email')
+        }else if(password===''){
+            setPassword('please enter a password')
+        }
+        else{
+            for(let i of store.state.users){
+                if(i.email===user.email && i.password===user.password){
+                    store.dispatch({type:'log_in'})
+                    history.push('/')
+                }
             }
         }
        

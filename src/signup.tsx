@@ -10,9 +10,9 @@ let user:any={
 const SignUp=()=>{
     let store:any=useContext(bmsContext);
     const history=useHistory();
-    let [errUser,setUser]=useState(null);
-    let [errEmail,setEmail]=useState(null);
-    let [errPassword,setPassword]=useState(null);
+    let [errUser,setUser]=useState('');
+    let [errEmail,setEmail]=useState('');
+    let [errPassword,setPassword]=useState('');
     function handleChange(e:any){
         let key=e.target.name;
         let val=e.target.value;
@@ -20,10 +20,21 @@ const SignUp=()=>{
 
     }
     async function AddUser(){
-        store.dispatch({type:'sign_up',payload:user})
-        history.push('/')
-       
-       }
+        let {username,email,password}=user;
+        if(username===''){
+            setUser('enter a username')
+        }
+        if(password===''){
+            setPassword('enter a password')
+        }
+        if(email===''){
+            setEmail('enter a email')
+        }
+        if(username!==''&&email!==''&&password!==''){
+            store.dispatch({type:'sign_up',payload:user})
+            history.push('/')
+        }
+    }
     return(
         <div className='d-flex flex-row justify-content-center mt-3'>
             <div className='login-card' style={{minWidth:'600px'}}>

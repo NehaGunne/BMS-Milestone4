@@ -22,8 +22,13 @@ const AddBook=()=>{
 
     }
     function addBook(){
-        store.dispatch({type:'add_book',payload:book})
-        history.push('/')
+        const{title,author,rating,price,cover}=book
+        if(title===''||author===''||rating===''||price===''||cover===''){
+            setMsg('*please enter all details')
+        }else{
+            store.dispatch({type:'add_book',payload:book})
+            history.push('/')
+        }
        }
 
     return(

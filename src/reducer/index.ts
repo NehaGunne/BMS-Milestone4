@@ -39,5 +39,7 @@ export const reducer=(state=store,action:any)=>{
                 ...state,
                 isAuth:false
             }
+        default:
+            return state;
     }
 }
